@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
+    <img alt="Vue logo" src="../assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <h3>Task Manager</h3>
-      <task-form></task-form>
-      <button @click="openTaskForm"> Add New Task </button>
+    <form @submit.prevent="addTask">
+      <input type="text" v-model="task" placeholder="Add Task">
+
+      <button type="submit"> Submit </button>
+    </form>
     <hr>
     <h3>Tasks</h3>
     <ul>
@@ -15,17 +18,10 @@
 
 <script>
 // @ is an alias to /src
-// import { ipcRenderer } from 'electron'
-import HelloWorld from '@/components/HelloWorld.vue'
-import TaskForm from '@/components/TaskForm.vue';
-// import { contextBridge } from 'electron'
-
 
 export default {
-  name: 'HomeView',
+  name: 'task',
   components: {
-    HelloWorld,
-    TaskForm
   },
   data(){
     return {
@@ -44,11 +40,7 @@ export default {
       console.log(this.$store);
       this.$store.commit('addTask',this.task)
       this.task = null;
-    },
-    openTaskForm(){
-      window.ipcRenderer.send('openTaskForm')
     }
-    
-    }
+  }
 }
 </script>
