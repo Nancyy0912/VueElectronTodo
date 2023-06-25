@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <h3>Task Manager</h3>
     <form @submit.prevent="addTask">
@@ -8,11 +7,11 @@
 
       <button type="submit"> Submit </button>
     </form>
-    <hr>
+    <!-- <hr>
     <h3>Tasks</h3>
     <ul>
       <li v-for='(item,index) in tasks' :key="index">{{item}}</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 

@@ -4,7 +4,7 @@ import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-
+import  path  from "path";
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
@@ -12,6 +12,7 @@ protocol.registerSchemesAsPrivileged([
 
 async function createWindow() {
   // Create the browser window.
+  console.log("Hiiii");
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -19,13 +20,14 @@ async function createWindow() {
       
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      // nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      preload: path.join(__dirname, "./preload.js"),
+      contextIsolation: true,
+      nodeIntegration: false,
       // preload: 'src/preload.js',
-      preload: path.join(src, 'preload.js'),
-      // nodeIntegration: true,
-    }
+    },
   })
+  // win.loadURL(`file://${__dirname}/index.html`);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -48,7 +50,8 @@ async function createTaskWindow() {
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-      preload: 'src/preload.js',
+      // preload: 'src/preload.js',
+      preload: path.join(__dirname, 'preload.js') 
     }
   })
 
@@ -86,6 +89,7 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+  console.log("ready");
   createWindow()
 })
 
@@ -103,3 +107,8 @@ if (isDevelopment) {
     })
   }
 }
+
+ipcMain.on('message',(args)=>{
+  console.log("event");
+  createTaskWindow();
+})

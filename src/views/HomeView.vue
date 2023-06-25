@@ -3,8 +3,8 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <h3>Task Manager</h3>
-      <task-form></task-form>
-      <button @click="openTaskForm"> Add New Task </button>
+      <!-- <task-form></task-form> -->
+      <button @click="openTaskForm()"> Add New Task </button>
     <hr>
     <h3>Tasks</h3>
     <ul>
@@ -46,7 +46,10 @@ export default {
       this.task = null;
     },
     openTaskForm(){
-      window.ipcRenderer.send('openTaskForm')
+      // console.log(window.ipcRenderer);
+      // window.ipcRenderer.send('openTaskForm',"Hii")
+      let openTaskForm = "Hello World"
+      window.api.send(openTaskForm)
     }
     
     }
