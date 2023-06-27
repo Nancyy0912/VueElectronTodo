@@ -1,56 +1,49 @@
 <template>
   <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <h3>Task Manager</h3>
-      <!-- <task-form></task-form> -->
-      <button @click="openTaskForm()"> Add New Task </button>
-    <hr>
+    <button @click="openTaskForm()">Add New Task</button>
+    <hr />
     <h3>Tasks</h3>
-    <p>{{tasks}}</p>
-    <ul v-for='(task,index) in tasks' :key="index">
-      <li  >{{task}}</li>
+    <p>{{ tasks }}</p>
+    <ul v-for="(task, index) in tasks" :key="index">
+      <li>{{ task }}</li>
     </ul>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import TaskForm from '@/components/TaskForm.vue';
+import HelloWorld from "@/components/HelloWorld.vue";
+import TaskForm from "@/components/TaskForm.vue";
 
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
     HelloWorld,
-    TaskForm
+    TaskForm,
   },
-  data(){
+  data() {
     return {
-      task:null
-    }
+      task: null,
+    };
   },
-  computed:{
-    tasks(){
-      console.log(this.$store);
+  computed: {
+    tasks() {
       return this.$store.getters.getTaskList;
-    }
+    },
   },
-  mounted(){
-    console.log("mounted");
+  mounted() {
     this.tasks;
+    let abc = window.api.node();
+    console.log(abc);
   },
 
-  methods:{
-    
-    openTaskForm(){
-      // console.log(window.ipcRenderer);
-      // window.ipcRenderer.send('openTaskForm',"Hii")
-      let openTaskForm = "Hello World"
-      window.api.send(openTaskForm)
-      // let abc = window.api.node();
-    }
-    
-    }
-}
+  methods: {
+    openTaskForm() {
+      let openTaskForm = "Hello World";
+      window.api.send("new-window", openTaskForm);
+      
+    },
+  },
+};
 </script>

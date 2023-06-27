@@ -1,11 +1,10 @@
 <template>
   <div class="home">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <h3>Task Manager {{task}}</h3>
+    <h3>Task Manager</h3>
     <form>
-      <input type="text" v-model="task" placeholder="Add Task">
-
-      <button @click="addTask()"> Submit </button>
+    <input type="text" v-model="task" placeholder="Add Task" />
+    &nbsp; &nbsp; 
+    <button @click="addTask()">Submit</button>
     </form>
     <!-- <hr>
     <h3>Tasks</h3>
@@ -19,15 +18,14 @@
 // @ is an alias to /src
 
 export default {
-  name: 'task',
-  components: {
-  },
-  data(){
+  name: "task",
+  components: {},
+  data() {
     return {
-      task:''
-    }
+      task: "",
+    };
   },
-  computed:{
+  computed: {
     // tasks(){
     //   console.log("task",this.$store.state.tasks);
     //   return this.$store.state.tasks;
@@ -37,13 +35,13 @@ export default {
   //     this.$store.dispatch('getTasks')
   // }
 
-  methods:{
-    addTask(){
+  methods: {
+    addTask() {
       console.log(this.task);
       // this.$store.dispatch('ADD_TASK',this.task)
-      this.$store.commit('ADD_TASK',this.task)
-      // this.task = null;
-    }
-  }
-}
+      this.$store.commit("ADD_TASK", this.task);
+      this.task = null;  
+    },
+  },
+};
 </script>
