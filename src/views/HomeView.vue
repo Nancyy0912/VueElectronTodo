@@ -7,19 +7,17 @@
       <button @click="openTaskForm()"> Add New Task </button>
     <hr>
     <h3>Tasks</h3>
-    <ul>
-      <li v-for='(item,index) in tasks' :key="index">{{item}}</li>
+    <p>{{tasks}}</p>
+    <ul v-for='(task,index) in tasks' :key="index">
+      <li  >{{task}}</li>
     </ul>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-// import { ipcRenderer } from 'electron'
 import HelloWorld from '@/components/HelloWorld.vue'
 import TaskForm from '@/components/TaskForm.vue';
-// import { contextBridge } from 'electron'
-
 
 export default {
   name: 'HomeView',
@@ -34,22 +32,23 @@ export default {
   },
   computed:{
     tasks(){
-      console.log(this.$store.state.tasks);
-      return this.$store.state.tasks;
+      console.log(this.$store);
+      return this.$store.getters.getTaskList;
     }
+  },
+  mounted(){
+    console.log("mounted");
+    this.tasks;
   },
 
   methods:{
-    addTask(){
-      console.log(this.$store);
-      this.$store.commit('addTask',this.task)
-      this.task = null;
-    },
+    
     openTaskForm(){
       // console.log(window.ipcRenderer);
       // window.ipcRenderer.send('openTaskForm',"Hii")
       let openTaskForm = "Hello World"
       window.api.send(openTaskForm)
+      // let abc = window.api.node();
     }
     
     }
