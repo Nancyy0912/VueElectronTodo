@@ -17,14 +17,19 @@
     "path": false
   },
   "dependencies": {
+    "3.0.0": "^3.0.0",
+    "@fullcalendar/core": "^6.1.8",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/vue3": "^6.1.8",
     "browserify-fs": "^1.0.0",
     "core-js": "^3.8.3",
     "electron-builder": "^24.4.0",
+    "fullcalendar": "^6.1.8",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "path-browserify": "^1.0.1",
-    "target": "electron-renderer",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3",
+    "vuetify": "^3.3.6",
     "vuex": "^4.0.0",
     "vuex-persistedstate": "^4.1.0"
   },
@@ -35,6 +40,7 @@
     "@vue/cli-service": "~5.0.0",
     "electron": "^25.2.0",
     "electron-devtools-installer": "^3.1.1",
-    "vue-cli-plugin-electron-builder": "~2.1.1"
+    "vue-cli-plugin-electron-builder": "~2.1.1",
+    "vue-cli-plugin-vuetify": "~2.5.8"
   }
 }

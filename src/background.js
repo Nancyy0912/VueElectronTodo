@@ -25,9 +25,10 @@ async function createWindow() {
       preload: path.join(__dirname, "./preload.js"),
       contextIsolation: true,
       nodeIntegration: false,
+      
     },
   });
-  // win.loadURL(`file://${__dirname}/index.html`);
+  win.setMenuBarVisibility(true);
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -48,8 +49,13 @@ async function createTaskWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       preload: path.join(__dirname, "preload.js"),
+      
     },
   });
+  // taskWindow.setMenuBarVisibility(false);
+  // taskWindow.on('closed', () => {
+  //   taskWindow = null
+  // })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -114,3 +120,6 @@ ipcMain.on('refresh-window', (event, args) => {
   console.log('refresh-window')
   win.reload();
 })
+// ipcMain.on('closeTaskForm',(event,arg)=>{
+//   taskWindow.close();
+// })

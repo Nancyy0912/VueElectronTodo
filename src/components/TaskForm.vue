@@ -1,35 +1,43 @@
 <template>
   <div class="home">
-    <h3>Task Manager</h3>
-    <form>
-    <input type="text" v-model="task" placeholder="Add Task" />
-    &nbsp; &nbsp; 
-    <button @click="addTask()">Submit</button>
-    </form>
-    <!-- <hr>
-    <h3>Tasks</h3>
-    <ul>
-      <li v-for='(item,index) in tasks' :key="index">{{item}}</li>
-    </ul> -->
+    <v-sheet width="300" class="mx-auto">
+    <v-form>
+      <v-text-field
+        v-model="task"
+        :rules="rules"
+        label="Add Task"
+      ></v-text-field>
+      <v-btn type="submit" @click="addTask()" block class="mt-2">Submit</v-btn>
+    </v-form>
+  </v-sheet>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+// import "@fullcalendar/core/vdom";
+// import FullCalendar from "@fullcalendar/vue3";
+// import dayGridPlugin from "@fullcalendar/daygrid";
+// import interactionPlugin from "@fullcalendar/interaction";
+// import Enter from '@/components/Enter.vue';
 
 export default {
   name: "task",
-  components: {},
+  components: {
+    // FullCalendar,
+    // Enter
+  },
   data() {
     return {
+      // plugins: [dayGridPlugin, interactionPlugin],
       task: "",
     };
   },
   computed: {
-    // tasks(){
-    //   console.log("task",this.$store.state.tasks);
-    //   return this.$store.state.tasks;
-    // }
+    tasks(){
+      console.log("task",this.$store.state.tasks);
+      return this.$store.state.tasks;
+    }
   },
   // mounted(){
   //     this.$store.dispatch('getTasks')
@@ -41,6 +49,7 @@ export default {
       // this.$store.dispatch('ADD_TASK',this.task)
       this.$store.commit("ADD_TASK", this.task);
       this.task = null;  
+      this.$router.push('./')
     },
   },
 };

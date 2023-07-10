@@ -13,15 +13,14 @@ export default createStore({
   mutations: {
     ADD_TASK(state, task) {
       state.tasks.push(task);
-      window.api.send('refresh-window', true);
+      // window.api.send('refresh-window', true);
+      // window.api.send('closeTaskForm', true);
     },
+    deleteItem(state, index) {
+      state = state.tasks.splice(index, 1);
+    }
   },
   actions: {
-    ADD_TASK: async function (context, task) {
-      let tasks = context.state.tasks;
-      tasks.push(task);
-      context.commit("addTask", tasks);
-    },
   },
   modules: {},
 });
