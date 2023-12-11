@@ -21,7 +21,16 @@ npm run electron:serve
 Vue.js 3
 Electron
 
-### Electron Builder
+## Project Structure
+
+Explain the key directories and files in your project.
+
+/src: Vue.js source code
+/public: Public assets
+/dist: Vue.js build output
+/dist_electron: Electron build output
+
+## Electron Builder
 This project uses Electron Builder for packaging and distributing your Electron app.
 
 ```bash
