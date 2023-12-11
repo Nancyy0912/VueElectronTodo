@@ -2,7 +2,6 @@ const { contextBridge, ipcRenderer } = require("electron");
 // Expose ipcRenderer to the client
 const API = {
   send: (event, msg) => {
-    console.log("send");
     ipcRenderer.send(event, msg);
   },
   receive: (channel, func) => {

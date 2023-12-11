@@ -64,17 +64,13 @@ export default {
     this.tasks;
     // let abc = window.api.chrome();
     // let electron = window.api.electron();
-    // console.log(abc, electron);
   },
 
   methods: {
     getCellBind(cell, row, column) {
-      console.log("key", cell, this.selectedItems);
       if (this.selectedItems) {
         this.selectedItems.filter((selectedItem) => {
-          console.log("111111", selectedItem.task);
           if (cell == selectedItem.task) {
-            console.log("selectedItem", selectedItem.task);
             return {
               class: ["custom-class"],
             };

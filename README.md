@@ -23,12 +23,25 @@ Electron
 
 ## Project Structure
 
-Explain the key directories and files in your project.
 
-/src: Vue.js source code
-/public: Public assets
-/dist: Vue.js build output
-/dist_electron: Electron build output
+```
+your-project/
+├── /src/                   # Vue.js source code
+│   ├── /assets/            # Vue.js assets (images, styles, etc.)
+│   ├── /components/        # Vue.js components
+│   ├── /views/             # Vue.js views or pages
+│   ├── background.js       # Electron main process entry point
+│   ├── preload.js          # Electron preload script
+│   ├── App.vue             # Vue.js main component
+│   └── main.js             # Vue.js entry point
+├── /public/                # Public assets (static files)
+├── /dist/                  # Vue.js build output
+├── /dist_electron/         # Electron build output
+├── package.json            # Node.js project configuration
+├── README.md               # Project documentation (you are here)
+└── ...                     # Other project files and folders
+
+```
 
 ## Electron Builder
 This project uses Electron Builder for packaging and distributing your Electron app.

@@ -16,7 +16,6 @@ let taskWindow, win;
 
 async function createWindow() {
   // Create the browser window.
-  console.log("Hiiii");
   win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -92,7 +91,6 @@ app.on("ready", async () => {
       console.error("Vue Devtools failed to install:", e.toString());
     }
   }
-  console.log("ready");
   createWindow();
 });
 
