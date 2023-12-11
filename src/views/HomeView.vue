@@ -1,26 +1,34 @@
 <template>
-  <div class="home">
-    <h3>Task Manager</h3>&nbsp;
-    &nbsp;<v-btn class="ma-2" @click="openTaskForm()"> Open Task Form </v-btn>
-
+  <div class="box">
+    <VaNavbar color="#F4F8FA" class="mb-3">
+      <template #center>
+        <VaNavbarItem class="logo">
+          <b>Task Manager</b>
+        </VaNavbarItem>
+      </template>
+      <template #right>
+        <VaButton class="mr-3 mb-2" @click="openTaskForm()"> Add Task </VaButton>
+      </template>
+    </VaNavbar>
+    
     <hr />
-    <h3>Tasks{{tasks}}</h3>
-    <v-table>
-      <thead>
-        <tr>
-          <th class="text-left">Tasks</th>
-          <th class="text-left">Activity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(task,index) in tasks" :key="index">
-          <td class="text-left">{{ task }}</td>
-          <td class="text-left">
-            <v-btn class="ma-2" @click="deleteItem(index)"> Delete </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
+    <h3>Tasks</h3>
+    
+    <VaDataTable
+      class="padding text-align"
+      v-model="selectedItems"
+      :items="tasks"
+      :columns="columns"
+      selectable
+      :cell-bind="isCellBind && getCellBind"
+      @selectionChange="selectedItemsEmitted = $event.currentSelectedItems"
+    >
+      <template #cell(actions)="{ rowIndex }">
+        <va-button @click="deleteItem(rowIndex)" color="danger" class="mr-6 mb-2">
+          Delete
+        </va-button>
+      </template>
+    </VaDataTable>
   </div>
 </template>
 
@@ -34,8 +42,17 @@ export default {
     TaskForm,
   },
   data() {
+    const columns = [
+      { key: "task", sortable: true },
+      { key: "actions", sortable: false },
+    ];
     return {
       task: null,
+      columns,
+      isCellBind: true,
+      isRowBind: true,
+      selectedItems: [],
+      selectedItemsEmitted: [],
     };
   },
   computed: {
@@ -51,9 +68,22 @@ export default {
   },
 
   methods: {
+    getCellBind(cell, row, column) {
+      console.log("key", cell, this.selectedItems);
+      if (this.selectedItems) {
+        this.selectedItems.filter((selectedItem) => {
+          console.log("111111", selectedItem.task);
+          if (cell == selectedItem.task) {
+            console.log("selectedItem", selectedItem.task);
+            return {
+              class: ["custom-class"],
+            };
+          }
+        });
+      }
+    },
     openTaskForm() {
-      // let openTaskForm = "Hello World";
-      this.$router.push("/task")
+      this.$router.push("/task");
       // window.api.send("new-window", openTaskForm);
     },
     deleteItem(index) {
@@ -62,3 +92,20 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.padding {
+  padding-bottom: 4px;
+}
+.text-align {
+  margin: 0 auto;
+  display: flex;
+  width: 55%;
+  text-align: center;
+  align-items: center;
+}
+::v-deep(.custom-class) {
+  text-decoration: line-through;
+  pointer-events: none;
+  background-color: var(--va-background-element);
+}
+</style>

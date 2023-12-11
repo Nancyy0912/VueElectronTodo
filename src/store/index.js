@@ -12,7 +12,7 @@ export default createStore({
   },
   mutations: {
     ADD_TASK(state, task) {
-      state.tasks.push(task);
+      state.tasks.push({"task":task});
       // window.api.send('refresh-window', true);
       // window.api.send('closeTaskForm', true);
     },
