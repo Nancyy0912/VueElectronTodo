@@ -1,8 +1,4 @@
 <template>
-  <!-- <nav>
-    <router-link to="/">Task List</router-link> |
-    <router-link to="/task">Add Task</router-link>
-  </nav> -->
   <router-view/>
 </template>
 
